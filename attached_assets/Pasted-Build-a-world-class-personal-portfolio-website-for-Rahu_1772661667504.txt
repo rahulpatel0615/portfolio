@@ -1,0 +1,194 @@
+Build a world-class personal portfolio website for Rahul, a SharePoint & Power Platform Developer with 4+ years of experience in Dallas, TX. Use React + Tailwind CSS + Framer Motion + GSAP. Structured for GitHub → Vercel deployment.
+
+🛠️ Tech Stack
+
+React (Vite setup)
+Tailwind CSS for styling
+Framer Motion for smooth section animations
+GSAP + ScrollTrigger for advanced scroll effects
+Lucide React for icons
+Typed.js for typewriter effect
+
+
+📁 Project Structure
+rahul-portfolio/
+├── public/
+│   └── Rahul_Resume.pdf        ← drop your resume here
+├── src/
+│   ├── components/
+│   │   ├── Loader.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── Hero.jsx
+│   │   ├── About.jsx
+│   │   ├── Skills.jsx
+│   │   ├── Projects.jsx
+│   │   ├── Certifications.jsx
+│   │   ├── Timeline.jsx
+│   │   ├── Stats.jsx
+│   │   ├── Contact.jsx
+│   │   └── Cursor.jsx
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── .gitignore
+├── index.html
+├── tailwind.config.js
+├── vite.config.js
+└── package.json
+
+👤 Sections
+1. Loading Screen
+
+Full screen black loader with glowing initials "R"
+Liquid/morphing blob animation around the letter
+Progress bar fills to 100% then fades out revealing the portfolio
+
+2. Navbar
+
+Glassmorphism sticky navbar (backdrop-blur, semi-transparent)
+Logo "Rahul." on the left with purple glow
+Nav links with magnetic hover effect
+Glowing "Resume" button that downloads Rahul_Resume.pdf on click
+Hamburger menu on mobile with slide-in drawer
+Navbar shrinks + changes opacity on scroll
+
+3. Hero Section
+
+Full viewport height
+Animated mesh gradient background (shifting blue, purple, dark)
+Floating 3D geometric shapes in background
+Large heading: "Hi, I'm Rahul" with glitch text animation on load
+Typewriter cycling: "SharePoint Developer" → "Power Platform Expert" → "Automation Specialist" → "Azure Developer"
+Two CTA buttons:
+
+"View My Work" – neon glowing border, fills on hover
+"Download Resume" – <a href="/Rahul_Resume.pdf" download>
+
+
+Scroll indicator arrow bouncing at bottom
+Mouse parallax effect on background shapes
+
+4. About Section
+
+Split layout: left = animated avatar with rotating ring + floating tech icons orbiting
+Right = bio text revealed word by word on scroll
+Bio: "4+ years building Microsoft ecosystem solutions. MS in Computer Science from University of North Texas. Currently working remotely from Dallas, TX."
+Animated rotating gradient border card
+
+5. Skills Section
+
+Hexagon-shaped skill cards with tech color glow on hover
+Skills: SharePoint Online, Power Apps, Power Automate, Power BI, Azure, Python, C#, SQL, JavaScript, Teams
+Circular progress rings animate from 0 on scroll
+Staggered pop-in animation
+
+6. Projects Section
+
+3D tilt card effect on hover
+Glowing gradient border on hover
+Cards:
+
+Sales Data Dashboard – Power BI + Python
+Power Apps Leave Management – Canvas App + SharePoint
+SharePoint Intranet Portal – SharePoint Online + SPFx
+
+
+GitHub + Live Demo buttons on each card
+Flip reveal animation on scroll
+
+7. Certifications Section
+
+Infinite auto-scrolling ticker of cert badges
+Golden shimmer sweep on hover
+Certs: PL-400, Power Platform App Maker, Azure AI Fundamentals
+Click badge → modal popup with details
+
+8. Experience Timeline
+
+Vertical animated timeline
+Entries slide in from alternating sides on scroll
+Entries: Bright Mind (current) → Infosys → KlientsGrowth → LTIMindtree
+Glowing dot connectors
+
+9. Stats Section
+
+Count-up animation: "4+ Years", "15+ Projects", "3 Certifications", "40% Faster Workflows"
+Particle burst behind each number
+
+10. Contact Section
+
+Glassmorphism contact form
+Input fields glow blue on focus
+Send button shimmer animation
+Social icons: LinkedIn, GitHub, Email with magnetic hover
+
+
+🎨 Design System
+
+Background: #050510
+Primary: #6366f1 (indigo)
+Accent: #06b6d4 (cyan)
+Font: Inter (body) + Space Grotesk (headings)
+Glassmorphism cards throughout
+Consistent glow shadows
+
+
+✨ Animations
+Cursor
+
+Hide default cursor
+Dual-ring cursor: cyan dot + lagging purple ring
+Hover: ring morphs into glow blob
+Click: shockwave ripple
+Sparkle trail that fades out
+
+Scroll (GSAP ScrollTrigger)
+
+Parallax on hero shapes
+Staggered grid reveals for skills and projects
+Horizontal slide-in for timeline
+Pin + scrub for stats section
+
+Hover (Framer Motion)
+
+3D tilt on project cards
+Magnetic buttons
+Shimmer on cert badges
+Scale + glow on skill hexagons
+
+Page Load
+
+Loader → glitch reveal → navbar slides down → content staggers in
+Total animation under 3 seconds
+
+
+📄 Resume Setup
+
+Place resume as public/Rahul_Resume.pdf
+Download button: <a href="/Rahul_Resume.pdf" download="Rahul_Resume.pdf">
+View button: <a href="/Rahul_Resume.pdf" target="_blank">
+Navbar resume link also triggers download
+
+
+🚀 GitHub + Vercel Setup
+.gitignore must include:
+node_modules/
+dist/
+.env
+.DS_Store
+vite.config.js must have:
+jsexport default {
+  base: '/',
+}
+package.json scripts must include:
+json"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview"
+}
+Vercel settings (auto-detected):
+
+Framework: Vite
+Build Command: npm run build
+Output Directory: dist
+Install Command: npm install
