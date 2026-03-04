@@ -3,6 +3,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Briefcase } from "lucide-react";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,28 +32,12 @@ export function Timeline() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const items = gsap.utils.toArray('.timeline-item');
-    
-    items.forEach((item: any, i) => {
-      gsap.from(item, {
-        scrollTrigger: {
-          trigger: item,
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        },
-        x: i % 2 === 0 ? -50 : 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out"
-      });
-    });
-
     // Animate the line drawing down
-    gsap.from(".timeline-line", {
+    gsap.from(".timeline-line-inner", {
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top center",
-        end: "bottom center",
+        start: "top 20%",
+        end: "bottom 80%",
         scrub: 1
       },
       scaleY: 0,
@@ -62,41 +47,98 @@ export function Timeline() {
   }, { scope: containerRef });
 
   return (
-    <section id="timeline" className="py-24 relative" ref={containerRef}>
+    <section id="timeline" className="py-24 relative overflow-hidden" ref={containerRef}>
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-sm font-mono tracking-widest text-accent mb-4 uppercase">Experience</h2>
-          <h3 className="text-4xl md:text-5xl font-display font-bold text-white">Career Journey</h3>
+          <motion.h2 
+            initial={{ opacity: 0, width: 0 }}
+            whileInView={{ opacity: 1, width: "auto" }}
+            viewport={{ once: true }}
+            className="text-sm font-mono tracking-widest text-accent mb-4 uppercase relative inline-block"
+          >
+            Experience
+            <motion.span 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              className="absolute -bottom-1 left-0 w-full h-0.5 bg-accent origin-left"
+            />
+          </motion.h2>
+          <motion.h3 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-display font-bold text-white"
+          >
+            Career Journey
+          </motion.h3>
         </div>
 
         <div className="relative">
-          {/* Central Line */}
-          <div className="timeline-line absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-accent to-primary/20 -translate-x-1/2" />
+          {/* Central Line Background */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/5 -translate-x-1/2" />
+          
+          {/* Central Line Animated */}
+          <div className="timeline-line-inner absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-accent to-primary/20 -translate-x-1/2 shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
 
           {EXPERIENCES.map((exp, idx) => (
-            <div key={idx} className={`timeline-item relative flex items-center justify-between md:justify-normal w-full mb-12 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+            <div key={idx} className={`relative flex items-center justify-between md:justify-normal w-full mb-16 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
               
               {/* Icon Marker */}
-              <div className="absolute left-8 md:left-1/2 w-12 h-12 rounded-full glass border border-primary/50 text-white flex items-center justify-center -translate-x-1/2 z-10 shadow-[0_0_15px_rgba(99,102,241,0.5)]">
-                <Briefcase size={20} />
+              <div className="absolute left-8 md:left-1/2 w-12 h-12 -translate-x-1/2 z-10">
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  className="w-full h-full rounded-full glass border border-primary/50 text-white flex items-center justify-center relative bg-[#050510]"
+                >
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                    className="group-hover:rotate-[360deg] transition-transform duration-1000"
+                  >
+                    <Briefcase size={20} />
+                  </motion.div>
+                  
+                  {/* Pulse Effect */}
+                  <motion.div
+                    animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute inset-0 rounded-full border border-accent/50 pointer-events-none"
+                  />
+                </motion.div>
               </div>
 
               {/* Empty Space for alignment on Desktop */}
               <div className="hidden md:block w-5/12" />
 
               {/* Content Card */}
-              <div className="w-full pl-20 md:pl-0 md:w-5/12">
-                <div className="glass-card p-6 rounded-2xl hover:border-primary/50 transition-colors duration-300">
+              <motion.div 
+                initial={{ opacity: 0, x: idx % 2 === 0 ? 100 : -100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: idx * 0.2, type: "spring", damping: 20 }}
+                className="w-full pl-20 md:pl-0 md:w-5/12 group perspective-1000"
+              >
+                <motion.div 
+                  whileHover={{ 
+                    rotateY: idx % 2 === 0 ? -5 : 5,
+                    rotateX: 5,
+                    scale: 1.02,
+                    borderColor: "rgba(6, 182, 212, 0.5)"
+                  }}
+                  className="glass-card p-6 rounded-2xl border border-white/5 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.2)]"
+                >
                   <span className="inline-block px-3 py-1 rounded-full bg-white/5 text-xs text-accent font-mono mb-4">
                     {exp.period}
                   </span>
-                  <h4 className="text-xl font-bold text-white mb-1">{exp.role}</h4>
+                  <h4 className="text-xl font-bold text-white mb-1 group-hover:text-accent transition-colors">{exp.role}</h4>
                   <h5 className="text-lg text-white/50 mb-4 font-display">{exp.company}</h5>
                   <p className="text-white/70 font-light text-sm leading-relaxed">
                     {exp.desc}
                   </p>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
 
             </div>
           ))}

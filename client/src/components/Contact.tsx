@@ -5,12 +5,18 @@ import { insertMessageSchema } from "@shared/routes";
 import { useCreateMessage } from "@/hooks/use-messages";
 import { Send, Mail, MapPin, Linkedin, Github } from "lucide-react";
 import type { z } from "zod";
+import { 
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 type FormData = z.infer<typeof insertMessageSchema>;
 
 export function Contact() {
   const { mutate, isPending } = useCreateMessage();
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<FormData>({
     resolver: zodResolver(insertMessageSchema),
   });
 
@@ -28,19 +34,25 @@ export function Contact() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, width: 0 }}
+            whileInView={{ opacity: 1, width: "auto" }}
             viewport={{ once: true }}
-            className="text-sm font-mono tracking-widest text-primary mb-4 uppercase"
+            className="text-sm font-mono tracking-widest text-primary mb-4 uppercase relative inline-block mx-auto"
           >
             Get In Touch
+            <motion.span 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary origin-left"
+            />
           </motion.h2>
           <motion.h3 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-display font-bold text-white"
+            animate={{ 
+              color: ["#ffffff", "#06b6d4", "#6366f1", "#ffffff"]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            className="text-4xl md:text-5xl font-display font-bold"
           >
             Let's Build Something.
           </motion.h3>
@@ -49,41 +61,81 @@ export function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Info Side */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-4 space-y-8"
-          >
-            <div className="glass-card p-6 rounded-2xl flex items-start gap-4">
+          <div className="lg:col-span-4 space-y-8">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="glass-card p-6 rounded-2xl flex items-start gap-4"
+            >
               <div className="p-3 bg-primary/20 text-primary rounded-xl">
                 <Mail size={24} />
               </div>
               <div>
                 <h4 className="text-white font-medium mb-1">Email</h4>
-                <a href="mailto:hello@rahulpatel.dev" className="text-white/60 hover:text-white transition-colors">hello@rahulpatel.dev</a>
+                <a href="mailto:rkpatel10116@gmail.com" className="text-white/60 hover:text-white transition-colors">rkpatel10116@gmail.com</a>
               </div>
-            </div>
+            </motion.div>
             
-            <div className="glass-card p-6 rounded-2xl flex items-start gap-4">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="glass-card p-6 rounded-2xl flex items-start gap-4"
+            >
               <div className="p-3 bg-accent/20 text-accent rounded-xl">
                 <MapPin size={24} />
               </div>
               <div>
                 <h4 className="text-white font-medium mb-1">Location</h4>
-                <p className="text-white/60">Dallas, TX (Remote)</p>
+                <p className="text-white/60">Dallas, TX</p>
               </div>
-            </div>
+            </motion.div>
 
             <div className="pt-4 flex gap-4">
-              <a href="#" className="w-12 h-12 rounded-full glass flex items-center justify-center text-white hover:bg-primary transition-all duration-300 hover:scale-110">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="w-12 h-12 rounded-full glass flex items-center justify-center text-white hover:bg-primary transition-all duration-300 hover:scale-110">
-                <Github size={20} />
-              </a>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <motion.a 
+                      whileHover={{ scale: 1.2, boxShadow: "0 0 20px rgba(99,102,241,0.6)" }}
+                      drag
+                      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+                      dragElastic={0.1}
+                      href="https://www.linkedin.com/in/rahulpatel0615" 
+                      target="_blank"
+                      className="w-12 h-12 rounded-full glass flex items-center justify-center text-white hover:bg-primary transition-all duration-300"
+                    >
+                      <Linkedin size={20} />
+                    </motion.a>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>LinkedIn</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <motion.a 
+                      whileHover={{ scale: 1.2, boxShadow: "0 0 20px rgba(6,182,212,0.6)" }}
+                      drag
+                      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+                      dragElastic={0.1}
+                      href="https://github.com/rahulpatel0615" 
+                      target="_blank"
+                      className="w-12 h-12 rounded-full glass flex items-center justify-center text-white hover:bg-accent transition-all duration-300"
+                    >
+                      <Github size={20} />
+                    </motion.a>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>GitHub</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
-          </motion.div>
+          </div>
 
           {/* Form Side */}
           <motion.div 
@@ -94,47 +146,55 @@ export function Contact() {
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-white/80 ml-1">Name</label>
+                <div className="relative group">
                   <input 
                     {...register("name")}
                     type="text" 
-                    placeholder="John Doe"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                    id="name"
+                    placeholder=" "
+                    className="peer w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-transparent focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all shadow-[0_0_0px_rgba(6,182,212,0)] focus:shadow-[0_0_15px_rgba(6,182,212,0.2)]"
                   />
-                  {errors.name && <p className="text-xs text-red-400 ml-1">{errors.name.message}</p>}
+                  <label htmlFor="name" className="absolute left-4 top-3 text-white/30 transition-all peer-focus:-top-6 peer-focus:left-1 peer-focus:text-accent peer-focus:text-xs peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:left-1 peer-[:not(:placeholder-shown)]:text-accent peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">Name</label>
+                  {errors.name && <p className="text-xs text-red-400 mt-1 ml-1">{errors.name.message}</p>}
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-white/80 ml-1">Email</label>
+                <div className="relative group">
                   <input 
                     {...register("email")}
                     type="email" 
-                    placeholder="john@example.com"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                    id="email"
+                    placeholder=" "
+                    className="peer w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-transparent focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all shadow-[0_0_0px_rgba(6,182,212,0)] focus:shadow-[0_0_15px_rgba(6,182,212,0.2)]"
                   />
-                  {errors.email && <p className="text-xs text-red-400 ml-1">{errors.email.message}</p>}
+                  <label htmlFor="email" className="absolute left-4 top-3 text-white/30 transition-all peer-focus:-top-6 peer-focus:left-1 peer-focus:text-accent peer-focus:text-xs peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:left-1 peer-[:not(:placeholder-shown)]:text-accent peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">Email</label>
+                  {errors.email && <p className="text-xs text-red-400 mt-1 ml-1">{errors.email.message}</p>}
                 </div>
               </div>
               
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-white/80 ml-1">Message</label>
+              <div className="relative group">
                 <textarea 
                   {...register("message")}
+                  id="message"
                   rows={5}
-                  placeholder="Tell me about your project..."
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
+                  placeholder=" "
+                  className="peer w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-transparent focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all resize-none shadow-[0_0_0px_rgba(6,182,212,0)] focus:shadow-[0_0_15px_rgba(6,182,212,0.2)]"
                 />
-                {errors.message && <p className="text-xs text-red-400 ml-1">{errors.message.message}</p>}
+                <label htmlFor="message" className="absolute left-4 top-3 text-white/30 transition-all peer-focus:-top-6 peer-focus:left-1 peer-focus:text-accent peer-focus:text-xs peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:left-1 peer-[:not(:placeholder-shown)]:text-accent peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">Message</label>
+                {errors.message && <p className="text-xs text-red-400 mt-1 ml-1">{errors.message.message}</p>}
               </div>
 
-              <button 
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isPending}
-                className="group w-full py-4 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-bold text-lg shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] transition-all duration-300 disabled:opacity-70 flex items-center justify-center gap-2"
+                className="relative overflow-hidden group w-full py-4 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-bold text-lg shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] transition-all duration-300 disabled:opacity-70 flex items-center justify-center gap-2"
               >
+                {/* Shimmer Effect */}
+                <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
+                
                 {isPending ? "Sending..." : "Send Message"}
                 {!isPending && <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
-              </button>
+              </motion.button>
             </form>
           </motion.div>
 

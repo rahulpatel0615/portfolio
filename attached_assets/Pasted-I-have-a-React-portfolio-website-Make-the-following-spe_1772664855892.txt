@@ -1,0 +1,116 @@
+I have a React portfolio website. Make the following specific changes.
+DO NOT touch the Resume button or any backend/form functionality.
+
+======================
+1. ABOUT SECTION
+======================
+
+PROFILE PHOTO:
+- Add my profile photo from /profile.jpg
+- Remove all hard edges — apply this CSS mask so photo blends 
+  seamlessly into the dark background with no visible border:
+  mask-image: radial-gradient(ellipse 75% 85% at 50% 50%, 
+  black 55%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 85% at 50% 50%, 
+  black 55%, transparent 100%);
+- NO border-radius, NO box-shadow, NO border on the image
+- Add a slow rotating cyan+indigo gradient ring BEHIND the photo 
+  (not clipping it)
+- Add Framer Motion animation: photo fades in + slides in from 
+  left on scroll
+
+TITLE ANIMATION:
+- "Architecting the Digital Workplace." heading should animate 
+  with a word-by-word reveal — each word fades + drops in with 
+  0.08s stagger using Framer Motion
+
+BIO UPDATE:
+- Change degree to: "Master's in Computer Science"
+
+======================
+2. SKILLS / EXPERTISE SECTION
+======================
+
+ICONS:
+- Replace current basic icons with high quality colored SVG icons:
+  • SharePoint → official blue Microsoft SharePoint icon
+  • Power Apps → official purple Power Apps icon  
+  • Power Automate → official blue Power Automate icon
+  • Power BI → official yellow Power BI icon
+  • Azure → official blue Azure icon
+  • Python → official Python blue+yellow icon
+  • C# → official purple C# icon
+  • SQL → red database stack icon
+  • JavaScript → official yellow JS icon
+  • Teams → official purple Teams icon
+
+TILE ANIMATIONS:
+- Each skill card animates in with a staggered pop + fade 
+  (0.1s delay between each) using Framer Motion whileInView
+- On hover:
+  • Card lifts up (translateY -8px)
+  • Glowing border appears in the skill's brand color 
+    (blue for SharePoint, purple for Power Apps, etc.)
+  • Icon bounces/pulses with a spring animation
+  • Background gets a subtle radial gradient glow from center
+- Add a floating idle animation — cards gently bob up and down 
+  continuously (staggered so they don't all move together)
+
+======================
+3. CAREER JOURNEY / TIMELINE SECTION
+======================
+
+ANIMATIONS:
+- Cards should NOT just appear — animate them sliding in from 
+  alternating sides (left card slides from left, right card 
+  slides from right) using Framer Motion + ScrollTrigger
+- Add a glowing animated vertical line connecting all timeline dots
+  — line draws itself downward as user scrolls
+- Each timeline dot pulses with a ripple/ping animation 
+  (like a sonar effect) in cyan color
+- On hover over a timeline card:
+  • Card glows with a cyan border
+  • Slight 3D tilt toward the mouse using perspective transform
+  • The briefcase icon rotates 360deg smoothly
+- Stagger each card entry with 0.2s delay
+
+======================
+4. CONTACT SECTION
+======================
+
+UPDATE INFO:
+- Email: rkpatel10116@gmail.com
+- Location: Dallas, TX
+- LinkedIn URL: https://www.linkedin.com/in/rahulpatel0615
+- GitHub URL: https://github.com/rahulpatel0615
+
+ANIMATIONS TO ADD:
+- "Let's Build Something." title should have a gradient color 
+  sweep animation — text color shifts from white → cyan → 
+  indigo → white on loop
+- Email and Location cards slide in from left on scroll 
+  with Framer Motion
+- LinkedIn and GitHub icon buttons:
+  • Scale up + glow on hover
+  • Add tooltip that appears above on hover 
+    ("LinkedIn" and "GitHub")
+  • Magnetic pull effect — button moves slightly toward cursor
+- Contact form fields:
+  • Glow cyan on focus with smooth transition
+  • Label floats up when field is active
+- Send Message button:
+  • Keep existing style but add shimmer sweep animation 
+    across the button on hover
+  • On click: button shows a brief success pulse animation
+
+======================
+5. GLOBAL FIXES
+======================
+
+- Make sure all section heading titles have a subtle underline 
+  draw animation when scrolled into view
+- Ensure smooth scroll behavior across the whole page
+- All animations should use Framer Motion whileInView with 
+  viewport: {{ once: true }} so they only trigger once
+- Keep ALL existing functionality intact — Resume button, 
+  form submission, navbar links
