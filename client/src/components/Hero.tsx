@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Typed from "typed.js";
 import { ArrowRight, Download } from "lucide-react";
+import { ParticleWaves } from "./ParticleWaves";
 
 export function Hero() {
   const typeRef = useRef<HTMLSpanElement>(null);
@@ -25,28 +26,9 @@ export function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      {/* Background Orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[20%] -left-[10%] w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px]"
-        />
-        <motion.div
-          animate={{
-            x: [0, -100, 0],
-            y: [0, 100, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[10%] -right-[10%] w-[600px] h-[600px] rounded-full bg-accent/20 blur-[150px]"
-        />
-      </div>
+    <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-[#050510]">
+      {/* Three.js Particle Background */}
+      <ParticleWaves />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col items-center text-center">
         <motion.div
