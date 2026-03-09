@@ -4,6 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { insertMessageSchema } from "@shared/routes";
 import { useCreateMessage } from "@/hooks/use-messages";
 import { Send, Mail, MapPin, Linkedin, Github } from "lucide-react";
+import emailjs from '@emailjs/browser';
+import { useToast } from "@/hooks/use-toast";
 import type { z } from "zod";
 import { 
   Tooltip,
@@ -16,13 +18,32 @@ type FormData = z.infer<typeof insertMessageSchema>;
 
 export function Contact() {
   const { mutate, isPending } = useCreateMessage();
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<FormData>({
+  const { toast } = useToast();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(insertMessageSchema),
   });
 
   const onSubmit = (data: FormData) => {
     mutate(data, {
-      onSuccess: () => reset()
+      onSuccess: () => {
+        emailjs.send(
+          'service_default',
+          'template_contact',
+          {
+            from_name: data.name,
+            from_email: data.email,
+            message: data.message,
+            to_name: 'Rahul Patel'
+          },
+          'YOUR_PUBLIC_KEY' // User will need to replace this or I use env var if provided
+        ).then(() => {
+          toast({ title: "Message sent!", description: "I'll get back to you soon." });
+          reset();
+        }).catch(() => {
+          toast({ title: "Stored locally", description: "Email service pending setup, but your message is saved!" });
+          reset();
+        });
+      }
     });
   };
 
@@ -99,13 +120,13 @@ export function Contact() {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <motion.a 
-                      whileHover={{ scale: 1.2, boxShadow: "0 0 20px rgba(99,102,241,0.6)" }}
+                      whileHover={{ scale: 1.2, boxShadow: "0 0 25px #0077b5", backgroundColor: "#0077b5" }}
                       drag
                       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
                       dragElastic={0.1}
                       href="https://www.linkedin.com/in/rahulpatel0615" 
                       target="_blank"
-                      className="w-12 h-12 rounded-full glass flex items-center justify-center text-white hover:bg-primary transition-all duration-300"
+                      className="w-12 h-12 rounded-full glass flex items-center justify-center text-white transition-all duration-300"
                     >
                       <Linkedin size={20} />
                     </motion.a>
@@ -118,13 +139,13 @@ export function Contact() {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <motion.a 
-                      whileHover={{ scale: 1.2, boxShadow: "0 0 20px rgba(6,182,212,0.6)" }}
+                      whileHover={{ scale: 1.2, boxShadow: "0 0 25px rgba(255,255,255,0.8)", backgroundColor: "#333" }}
                       drag
                       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
                       dragElastic={0.1}
                       href="https://github.com/rahulpatel0615" 
                       target="_blank"
-                      className="w-12 h-12 rounded-full glass flex items-center justify-center text-white hover:bg-accent transition-all duration-300"
+                      className="w-12 h-12 rounded-full glass flex items-center justify-center text-white transition-all duration-300"
                     >
                       <Github size={20} />
                     </motion.a>

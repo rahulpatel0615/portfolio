@@ -24,6 +24,34 @@ const PROJECTS = [
     image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&q=80",
     gradient: "from-emerald-500/20 to-teal-500/20",
   },
+  {
+    title: "Agent-based Ridesharing Simulation",
+    description: "Advanced simulation of autonomous ridesharing behavior developed at UNT using complex algorithms.",
+    tech: ["Python", "Simulation", "AI"],
+    image: "https://images.unsplash.com/photo-1558444479-c8f010524776?w=800&q=80",
+    gradient: "from-orange-500/20 to-red-500/20",
+  },
+  {
+    title: "InfoPath to Power App Conversion",
+    description: "Modernization of legacy InfoPath forms into high-performance Power Apps canvas applications for enterprise scale.",
+    tech: ["Power Apps", "Legacy Migration"],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+    gradient: "from-blue-500/20 to-indigo-500/20",
+  },
+  {
+    title: "SharePoint Workflow to Power Automate",
+    description: "Automated migration and redevelopment of legacy SharePoint workflows into modern Power Automate flows.",
+    tech: ["Power Automate", "SharePoint"],
+    image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=800&q=80",
+    gradient: "from-green-500/20 to-blue-500/20",
+  },
+  {
+    title: "Power Platform Apps Dev & Migration",
+    description: "Full-lifecycle development and migration of suite of Power Platform applications for global enterprise clients.",
+    tech: ["Power Platform", "Dataverse", "Azure"],
+    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80",
+    gradient: "from-pink-500/20 to-purple-500/20",
+  },
 ];
 
 export function Projects() {

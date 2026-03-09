@@ -22,19 +22,20 @@ export function About() {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500 to-indigo-600 blur-2xl opacity-30 scale-110"
+                className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500 via-primary to-indigo-600 blur-2xl opacity-40 scale-110"
+              />
+              <motion.div
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute inset-0 rounded-full border-2 border-primary/30 shadow-[0_0_30px_rgba(99,102,241,0.3)]"
               />
               
               {/* Profile Photo with Mask */}
-              <div className="relative w-full h-full">
+              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white/10 shadow-2xl">
                 <img 
                   src="/profile.jpg" 
                   alt="Rahul Patel"
                   className="w-full h-full object-cover"
-                  style={{
-                    maskImage: 'radial-gradient(ellipse 75% 85% at 50% 50%, black 55%, transparent 100%)',
-                    WebkitMaskImage: 'radial-gradient(ellipse 75% 85% at 50% 50%, black 55%, transparent 100%)'
-                  }}
                 />
               </div>
             </div>

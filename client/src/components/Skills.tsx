@@ -11,16 +11,16 @@ import {
 } from "react-icons/fa6";
 
 const SKILLS = [
-  { name: "SharePoint", icon: FaMicrosoft, color: "#0078D4" },
-  { name: "Power Apps", icon: FaMicrosoft, color: "#742774" },
-  { name: "Power Automate", icon: FaMicrosoft, color: "#0066FF" },
-  { name: "Power BI", icon: FaChartBar, color: "#F2C811" },
-  { name: "Azure", icon: FaCloud, color: "#0089D6" },
-  { name: "Python", icon: FaPython, color: "#3776AB" },
-  { name: "C#", icon: FaCode, color: "#512BD4" },
-  { name: "SQL", icon: FaDatabase, color: "#CC2927" },
-  { name: "JavaScript", icon: FaJs, color: "#F7DF1E" },
-  { name: "Teams", icon: FaUsers, color: "#6264A7" },
+  { name: "SharePoint", icon: FaMicrosoft, color: "#0078D4", url: "https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration" },
+  { name: "Power Apps", icon: FaMicrosoft, color: "#742774", url: "https://powerapps.microsoft.com/" },
+  { name: "Power Automate", icon: FaMicrosoft, color: "#0066FF", url: "https://powerautomate.microsoft.com/" },
+  { name: "Power BI", icon: FaChartBar, color: "#F2C811", url: "https://powerbi.microsoft.com/" },
+  { name: "Azure", icon: FaCloud, color: "#0089D6", url: "https://azure.microsoft.com/" },
+  { name: "Python", icon: FaPython, color: "#3776AB", url: "https://www.python.org/" },
+  { name: "C#", icon: FaCode, color: "#512BD4", url: "https://learn.microsoft.com/en-us/dotnet/csharp/" },
+  { name: "SQL", icon: FaDatabase, color: "#CC2927", url: "https://www.microsoft.com/en-us/sql-server/" },
+  { name: "JavaScript", icon: FaJs, color: "#F7DF1E", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+  { name: "Teams", icon: FaUsers, color: "#6264A7", url: "https://www.microsoft.com/en-us/microsoft-teams/group-chat-software" },
 ];
 
 export function Skills() {
@@ -55,8 +55,11 @@ export function Skills() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {SKILLS.map((skill, index) => (
-            <motion.div
+            <motion.a
               key={skill.name}
+              href={skill.url}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -84,13 +87,11 @@ export function Skills() {
               }}
               className="glass-card rounded-2xl p-6 flex flex-col items-center justify-center gap-4 group cursor-pointer relative overflow-visible border border-white/5 hover:border-transparent transition-colors duration-300"
             >
-              {/* Hover Glow Background */}
               <div 
                 className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-2xl blur-xl"
                 style={{ background: `radial-gradient(circle at center, ${skill.color}, transparent)` }}
               />
               
-              {/* Glowing Border on Hover */}
               <div 
                 className="absolute inset-0 rounded-2xl border-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                 style={{ borderColor: skill.color, boxShadow: `0 0 20px ${skill.color}40` }}
@@ -111,7 +112,7 @@ export function Skills() {
               <span className="text-white/70 font-medium text-sm text-center group-hover:text-white transition-colors relative z-10">
                 {skill.name}
               </span>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>
