@@ -121,12 +121,14 @@ export function Contact() {
                   <TooltipTrigger asChild>
                     <motion.a 
                       whileHover={{ scale: 1.2, boxShadow: "0 0 25px #0077b5", backgroundColor: "#0077b5" }}
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                       drag
                       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
                       dragElastic={0.1}
                       href="https://www.linkedin.com/in/rahulpatel0615" 
                       target="_blank"
-                      className="w-12 h-12 rounded-full glass flex items-center justify-center text-white transition-all duration-300"
+                      className="w-12 h-12 rounded-full glass flex items-center justify-center text-white transition-all duration-300 shadow-[0_0_15px_rgba(0,119,181,0.3)]"
                     >
                       <Linkedin size={20} />
                     </motion.a>
@@ -140,12 +142,14 @@ export function Contact() {
                   <TooltipTrigger asChild>
                     <motion.a 
                       whileHover={{ scale: 1.2, boxShadow: "0 0 25px rgba(255,255,255,0.8)", backgroundColor: "#333" }}
+                      animate={{ y: [0, 5, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                       drag
                       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
                       dragElastic={0.1}
                       href="https://github.com/rahulpatel0615" 
                       target="_blank"
-                      className="w-12 h-12 rounded-full glass flex items-center justify-center text-white transition-all duration-300"
+                      className="w-12 h-12 rounded-full glass flex items-center justify-center text-white transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)]"
                     >
                       <Github size={20} />
                     </motion.a>

@@ -62,17 +62,24 @@ export function Certifications() {
           {CERTS.map((cert, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="glass-card p-6 rounded-2xl flex items-center gap-4 group hover:border-primary/50 transition-all border border-white/5"
+              transition={{ 
+                duration: 0.5, 
+                delay: idx * 0.1,
+                ease: "easeOut" 
+              }}
+              className={`glass-card p-6 rounded-2xl flex items-center gap-4 group transition-all border border-white/5 relative overflow-hidden hover:border-primary/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] ${idx === 9 ? "lg:col-start-2" : ""}`}
             >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-shimmer" />
+              
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300 relative z-10">
                 <Award size={24} />
               </div>
-              <div>
-                <h4 className="text-white font-bold text-sm leading-tight mb-1">{cert.title}</h4>
+              <div className="relative z-10">
+                <h4 className="text-white font-bold text-sm leading-tight mb-1 group-hover:text-primary transition-colors">{cert.title}</h4>
                 <p className="text-white/50 text-xs">{cert.issuer} • {cert.date}</p>
               </div>
             </motion.div>
