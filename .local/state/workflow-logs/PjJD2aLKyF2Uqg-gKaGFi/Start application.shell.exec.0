@@ -1,0 +1,59 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0K7:40:36 PM [express] serving on port 5000
+
+
+
+
+[1;1H[0J[2m7:40:38 PM[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [33mwarning: [33mDuplicate "transition" attribute in JSX element[33m
+95 |            }}
+96 |            //@ts-ignore
+97 |            transition={{
+   |            ^
+98 |              y: {
+99 |                duration: 3,
+[39m
+  Plugin: [35mvite:esbuild[39m
+  File: [36m/home/runner/workspace/client/src/components/Skills.tsx[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m7:41:08 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/Skills.tsx, /src/index.css[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m7:41:08 PM[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [33mwarning: [33mDuplicate "transition" attribute in JSX element[33m
+93 |            }}
+94 |            //@ts-ignore
+95 |            transition={{
+   |            ^
+96 |              y: {
+97 |                duration: 3,
+[39m
+  Plugin: [35mvite:esbuild[39m
+  File: [36m/home/runner/workspace/client/src/components/Skills.tsx[39m

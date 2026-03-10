@@ -67,19 +67,16 @@ export function Skills() {
                 type: "spring",
                 stiffness: 260,
                 damping: 20,
-                delay: index * 0.1 
-              }}
-              animate={{
-                y: [0, -10, 0],
-              }}
-              //@ts-ignore
-              transition={{
+                delay: index * 0.1,
                 y: {
                   duration: 3,
                   repeat: Infinity,
                   ease: "easeInOut",
                   delay: index * 0.2
                 }
+              }}
+              animate={{
+                y: [0, -10, 0],
               }}
               whileHover={{ 
                 y: -18,
